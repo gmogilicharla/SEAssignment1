@@ -23,7 +23,7 @@
  * 
  * 
  * 
- * Date:
+ * Date: 
  * September 24, 2023
  * 
  * 
@@ -59,6 +59,7 @@ public class LastTheorem {
 		
 		int k = 0;
 	    int n = 0;
+	    long smallx = 0, smally =0;
 	    
 	    //scanner object created. it will help in taking user inputs
 	    Scanner userinput = new Scanner(System.in);
@@ -78,42 +79,33 @@ public class LastTheorem {
 	    {
 	    	for(long y = lower_limit; y<=k; y++)
 	    	{	
-	    		System.out.println("\n\n===========================================================================");
-	        	System.out.print("==>   x = " + x +",  ");
-	        	System.out.print("y = " + y +",  ");
-	        	System.out.print("n = " + n);
-	        	System.out.println();
-	        	
 	        	//lhs means left hand side, which is equal to x^n + y^n
 	        	long lhs = (long)((Math.pow (x, n))+(Math.pow (y, n)));
-	        	System.out.println("\nFirst Calculate x^n + y^n");
-	        	System.out.println("==>   "+x+"^"+n+" + "+y+"^"+n+" = "+lhs);
 	        
 	        	//z value is calculated by taking nth root of the result of the above equation
 	        	long z = (long) Math.pow (lhs, 1.0/n);
-	        	System.out.println("\n==>   z = "+z);
-	        	System.out.println();
 	        
 	        	//Here we are calculating differences with respect to z and z+1, smaller will be our near miss
-	        	long nearmiss = (long)(lhs - Math.pow (z, n));
+	        	long nearmiss = (long)(lhs - Math.pow (z, n));        	
 	        	if(((long)(Math.pow (z+1, n) - lhs))<nearmiss)
 	        	{
 	        		nearmiss = (long)(Math.pow (z+1, n) - lhs);
 	        	}
-	        	System.out.println("==>   Near Miss = "+nearmiss);
 	        
 	        	//here we are calculating the Relative miss by applying mentioned formula
-	        	double rltvmiss = 100. * nearmiss / lhs;
-	        	System.out.println("==>   Relative Miss = "+rltvmiss);
+	        	double rltvmiss = 1. * nearmiss / lhs;
 	        	
 	        	//Here we are finding smallest possible miss 
 	        	if(rltvmiss<smallestpossiblemiss)
 	        	{
 	        		smallestpossiblemiss = rltvmiss;
+	        		smallx = x;
+	        		smally = y;
 	        	}
-	        	System.out.println("==>   Smallest Possible Miss = "+smallestpossiblemiss);
+	        	
 	        }
 	    }
+	    System.out.println("==>   Smallest Possible Miss is at x = "+smallx+" and y = "+smally+"  Relative Difference = "+String.format("%.7f", smallestpossiblemiss));
 	    System.out.println("\n\n============  Execution Completed for all possible combinations of x and y  ============================");
 	}
 }
